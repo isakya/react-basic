@@ -1,17 +1,23 @@
-import React from 'react'
-// 类组件的创建和渲染
+import React from "react"
 
-
-// 创建
-class HelloComponent extends React.Component {
-  render() {
-    return <div>this is class Component</div>
+// 事件绑定（函数组件）
+function Hello() {
+  const clickHandler = () => {
+    console.log('函数组件中的事件被触发了')
   }
+  return <h1 onClick={clickHandler}>Hello</h1>
 }
 
-
-// 渲染 <HelloComponent /> 或者 <HelloComponent></HelloComponent>
-
+// 事件绑定（类组件）
+class HelloComponent extends React.Component {
+  // 事件回调（标准写法）
+  clickHandler = () => {
+    console.log('类组件中的事件被触发了')
+  }
+  render() {
+    return <div onClick={this.clickHandler}>this is class Component</div>
+  }
+}
 
 
 function App() {
@@ -19,7 +25,9 @@ function App() {
     <>
       <div>
         {/* 渲染 */}
-        <HelloComponent />
+        <Hello />
+        <Hello></Hello>
+
         <HelloComponent></HelloComponent>
       </div>
     </>
