@@ -1,22 +1,19 @@
-// React如何完成列表渲染
-// 技术方案：map 重复渲染的是哪个模板 就 return 谁
-// 注意事项：跟 vue 一样也需要加上 key 属性，为了提高diff性能
-// key仅仅在内部使用，不会出现在真实的dom结构中
+// 条件渲染
+// 技术方案：三元表达式（常用）,逻辑&&运算
 
-const songs = [
-  { id: 1, name: 'dddd' },
-  { id: 2, name: 'dddd' },
-  { id: 3, name: 'dddd' },
-]
-
-
-
+// 1. 三元表达式 - 满足条件才渲染一个span标签
+// 2. && 运算
+const flag = true
 function App() {
   return (
     <div className="App">
-      <ul>
-        {songs.map(song => <li key={song.id}>{song.name}</li>)}
-      </ul>
+      {flag ? (
+        <div>
+          <span>this is span</span>
+        </div>
+      ) : null}
+
+      {true && <span>this is span</span>}
     </div>
   )
 }
