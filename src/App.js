@@ -1,15 +1,14 @@
 
-// 事件对象e
+// 传递自定义参数
+
+// 1. 只需要参数则 {clickHandler} => {() => clickHandler('自定义的参数'))
+// 2. 即需要 e，也需要额外参数 {(e) => clickHandler(e, '自定义参数')}
 function Hello() {
-  const clickHandler = (e) => {
-    // 阻止默认行为
-    e.preventDefault()
-    console.log('函数组件中的事件被触发了', e)
+  const clickHandler = (e, msg) => {
+    console.log('函数组件中的事件被触发了', e, msg)
   }
   return (
-    <div>
-      <a onClick={clickHandler} href="http://www.baidu.com">百度</a>
-    </div>
+    <div onClick={(e) => clickHandler(e, 'this is msg')} href="http://www.baidu.com">点我</div>
   )
 }
 
