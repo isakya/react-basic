@@ -1,24 +1,17 @@
-import React from "react"
 
-// 事件绑定（函数组件）
+// 事件对象e
 function Hello() {
-  const clickHandler = () => {
-    console.log('函数组件中的事件被触发了')
+  const clickHandler = (e) => {
+    // 阻止默认行为
+    e.preventDefault()
+    console.log('函数组件中的事件被触发了', e)
   }
-  return <h1 onClick={clickHandler}>Hello</h1>
+  return (
+    <div>
+      <a onClick={clickHandler} href="http://www.baidu.com">百度</a>
+    </div>
+  )
 }
-
-// 事件绑定（类组件）
-class HelloComponent extends React.Component {
-  // 事件回调（标准写法）
-  clickHandler = () => {
-    console.log('类组件中的事件被触发了')
-  }
-  render() {
-    return <div onClick={this.clickHandler}>this is class Component</div>
-  }
-}
-
 
 function App() {
   return (
@@ -27,8 +20,6 @@ function App() {
         {/* 渲染 */}
         <Hello />
         <Hello></Hello>
-
-        <HelloComponent></HelloComponent>
       </div>
     </>
   )
