@@ -1,12 +1,17 @@
-// 函数组件的创建和渲染
-// 创建
+import React from 'react'
+// 类组件的创建和渲染
 
-// 组件首字母必须大写
-function Hello() {
-  return <h1>hello</h1>
+
+// 创建
+class HelloComponent extends React.Component {
+  render() {
+    return <div>this is class Component</div>
+  }
 }
 
-// 渲染 <Hello /> 或者 <Hello></Hello>
+
+// 渲染 <HelloComponent /> 或者 <HelloComponent></HelloComponent>
+
 
 
 function App() {
@@ -14,8 +19,8 @@ function App() {
     <>
       <div>
         {/* 渲染 */}
-        <Hello></Hello>
-        <Hello />
+        <HelloComponent />
+        <HelloComponent></HelloComponent>
       </div>
     </>
   )
