@@ -10,10 +10,6 @@ import App from './App'
 // 渲染根组件APP 到一个 id 为root的dom节点上
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  // 严格模式节点需要去掉
-  // useEffect的执行事件
-  // <React.StrictMode>
   <App />
-  // </React.StrictMode>
 )
 
