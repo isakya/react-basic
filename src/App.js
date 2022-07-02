@@ -1,32 +1,31 @@
-// 通过类组件修改状态的方式 counter
-
 import React from 'react'
+// this 有问题的写法
 
-class Counter extends React.Component {
-  // 通过state定义组件状态
-  state = {
-    count: 0
+
+class Test extends React.Component {
+  constructor() {
+    super()
+    // 使用bind强行修正 this 指向
+    // 相当于在类组件初始化阶段 就可以把回调函数的this修正到永远指向当前组件实例的对象
+    this.handler = this.handler.bind(this)
   }
-  // 事件回调函数
-  changeCount = () => {
-    // 修改state
-    // react这个体系下 '数据变化' 
-    // value 永远是上一次 count 值 + 1
-    this.setState({
-      count: this.state.count + 1
-    })
+
+  handler() {
+    console.log(this)
   }
+
   render() {
     return (
-      <button onClick={this.changeCount}>{this.state.count} click</button>
+      <button onClick={this.handler}>button</button>
     )
   }
 }
 
+
 function App() {
   return (
     <div>
-      <Counter></Counter>
+      <Test></Test>
     </div>
   )
 }
