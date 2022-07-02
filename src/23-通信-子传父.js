@@ -4,13 +4,11 @@ import React from 'react'
 // 父传子 props
 // 子传父：子组件调用父组件传递过来的函数，并把想要传递的数据当成函数的实参即可
 function Son({ getSonMesg }) {
-  function clickHandler() {
-    getSonMesg('this is son message!')
-  }
+
   return (
     <>
       <div>this is son</div>
-      <button onClick={clickHandler}>点击</button>
+      <button onClick={() => getSonMesg('this is son message!')}>点击</button>
     </>
   )
 }
