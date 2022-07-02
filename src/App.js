@@ -1,4 +1,5 @@
-// 父传子
+// 父传子 可传的数据类型
+
 import React from 'react'
 
 // 函数式的Son
