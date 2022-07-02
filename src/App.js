@@ -1,31 +1,50 @@
+// 状态不可变说明
+
 import React from 'react'
-// this 有问题的写法
 
-
-class Test extends React.Component {
-  constructor() {
-    super()
-    // 使用bind强行修正 this 指向
-    // 相当于在类组件初始化阶段 就可以把回调函数的this修正到永远指向当前组件实例的对象
-    this.handler = this.handler.bind(this)
+class Counter extends React.Component {
+  state = {
+    count: 0,
+    list: [1, 2, 3],
+    person: {
+      name: 'jack',
+      age: 20
+    }
   }
+  changeCount = () => {
+    // this.setState({
+    //   list: [...this.state.list, 4, 5], // 数组修改
+    // })
+    // // 对象修改
+    // this.setState({
+    //   person: {
+    //     ...this.state.person,
+    //     name: 'ls'
+    //   }
+    // })
 
-  handler() {
-    console.log(this)
+    // 删除数组元素 - filter
+    this.setState({
+      list: this.state.list.filter(item => item !== 2)
+    })
   }
-
   render() {
     return (
-      <button onClick={this.handler}>button</button>
+      <>
+        <ul>
+          {this.state.list.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        <div>{this.state.person.name}</div>
+        <button onClick={this.changeCount}>{this.state.count} click</button>
+      </>
     )
   }
 }
 
-
 function App() {
   return (
     <div>
-      <Test></Test>
+      <Counter></Counter>
     </div>
   )
 }
