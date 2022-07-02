@@ -1,38 +1,33 @@
-// 父传子 可传的数据类型
-
+// 子传父
 import React from 'react'
+// Son
+// 父传子 props
+// 子传父：子组件调用父组件传递过来的函数，并把想要传递的数据当成函数的实参即可
+function Son({ getSonMesg }) {
 
-// 函数式的Son
-function Son(props) {
-  // props 是一个对象 里面存着通过父组件传入的所有数据
   return (
-
     <>
-      <div>我是函数子组件<br />数组数据：{props.list.map(item => <p key={item}>{item}</p>)}</div>
-      <div>对象数据：{props.userInfo.name}</div>
-      <button onClick={props.getMsg}>触发父组件中的函数</button>
-      <p>{props.child}</p>
-
+      <div>this is son</div>
+      <button onClick={() => getSonMesg('this is son message!')}>点击</button>
     </>
   )
 }
+
 
 class App extends React.Component {
   // 父组件准备数据
   state = {
     list: [1, 2, 3],
-    userInfo: {
-      name: 'ap',
-      age: 30
-    },
   }
-  getMsg = () => {
-    console.log('我是函数')
+  // 1. 准备一个函数传递给子组件
+  getSonMesg = (msg) => {
+    console.log(msg)
   }
+
   render() {
     return (
       <div>
-        <Son list={this.state.list} userInfo={this.state.userInfo} getMsg={this.getMsg} child={<span>this is child</span>}></Son>
+        <Son getSonMesg={this.getSonMesg}></Son>
       </div >
     )
   }
