@@ -1,42 +1,24 @@
-// 状态不可变说明
-
 import React from 'react'
 
 class Counter extends React.Component {
+  // 1.声明用来控制input value的react组件自己的状态
   state = {
-    count: 0,
-    list: [1, 2, 3],
-    person: {
-      name: 'jack',
-      age: 20
-    }
+    message: 'this is message'
   }
-  changeCount = () => {
-    // this.setState({
-    //   list: [...this.state.list, 4, 5], // 数组修改
-    // })
-    // // 对象修改
-    // this.setState({
-    //   person: {
-    //     ...this.state.person,
-    //     name: 'ls'
-    //   }
-    // })
 
-    // 删除数组元素 - filter
+  inputChange = (e) => {
+    console.log('change事件触发了')
+    // 4. 拿到输入框最新的值，交给state中的message
     this.setState({
-      list: this.state.list.filter(item => item !== 2)
+      message: e.target.value
     })
   }
+
   render() {
     return (
-      <>
-        <ul>
-          {this.state.list.map((item) => <li key={item}>{item}</li>)}
-        </ul>
-        <div>{this.state.person.name}</div>
-        <button onClick={this.changeCount}>{this.state.count} click</button>
-      </>
+      // 2. 给input框的value属性绑定 react state
+      // 3. 给input框绑定一个change的世界 为了拿到当前输入框中的数据
+      <input type="text" value={this.state.message} onChange={this.inputChange} />
     )
   }
 }
