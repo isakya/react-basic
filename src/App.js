@@ -1,32 +1,38 @@
-// 非受控组件、通过dom来获取元素的值
-// 导入ref
-import React, { createRef } from 'react'
+// 父传子
+import React from 'react'
 
-class Counter extends React.Component {
+// 函数式的Son
+function SonF(props) {
+  // props 是一个对象 里面存着通过父组件传入的所有数据
+  return (
+    <div>我是函数子组件,{props.msg}</div>
+  )
+}
 
-  // 这个实例属性是可以自定义的
-  msgRef = createRef()
 
-  getValue = () => {
-    // 通过msgRef获取input value值
-    console.log(this.msgRef.current.value)
-  }
+// 类组件的Son
+class SonC extends React.Component {
   render() {
     return (
-      <>
-        <input type="text" ref={this.msgRef} />
-        <button onClick={this.getValue}>点击获取输入框的值</button>
-      </>
+      // 类组件必须通过 this 关键词获取props数据，这里的props是固定的
+      <div>我是类子组件,{this.props.msg}</div>
     )
   }
 }
 
-function App() {
-  return (
-    <div>
-      <Counter></Counter>
-    </div>
-  )
+class App extends React.Component {
+  // 父组件准备数据
+  state = {
+    message: 'this is message'
+  }
+  render() {
+    return (
+      <div>
+        <SonF msg={this.state.message}></SonF>
+        <SonC msg={this.state.message}></SonC>
+      </div >
+    )
+  }
 }
 
 export default App
