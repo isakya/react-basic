@@ -1,5 +1,5 @@
 // 非受控组件、通过dom来获取元素的值
-// 导入ref
+// 1. 导入ref
 import React, { createRef } from 'react'
 
 class Counter extends React.Component {
@@ -8,7 +8,7 @@ class Counter extends React.Component {
   msgRef = createRef()
 
   getValue = () => {
-    // 通过msgRef获取input value值
+    // 2. 通过msgRef获取input value值
     console.log(this.msgRef.current.value)
   }
   render() {
