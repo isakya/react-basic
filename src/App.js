@@ -1,35 +1,46 @@
-// 子传父
+// 通过共同父组件在兄弟组件间传值
+
+// 目标：B组件中的数据 传给 A 组件
+// 1. 先把B中的数据通过子传父 传给App
+// 2. 再把App接收到的Son中的数据 通过父传子 传给A
 import React from 'react'
-// Son
-// 父传子 props
-// 子传父：子组件调用父组件传递过来的函数，并把想要传递的数据当成函数的实参即可
-function Son({ getSonMesg }) {
-  function clickHandler() {
-    getSonMesg('this is son message!')
-  }
+
+function SonA(props) {
+  return (
+    <div>
+      this is sonA
+      <p>{props.sendAMsg}</p>
+    </div>
+  )
+}
+
+function SonB(props) {
+  const bMsg = '这是来自B组件的数据'
   return (
     <>
-      <div>this is son</div>
-      <button onClick={clickHandler}>点击</button>
+      <div>this is sonB</div>
+      <button onClick={() => props.getBMsg(bMsg)}>B组件按钮</button>
     </>
   )
 }
 
 
 class App extends React.Component {
-  // 父组件准备数据
   state = {
-    list: [1, 2, 3],
+    sendAMsg: ''
   }
-  // 1. 准备一个函数传递给子组件
-  getSonMesg = (msg) => {
-    console.log(msg)
+  // 声明一个传给B组件的方法
+  getBMsg = (msg) => {
+    // 把msg数据交给sendAMsg
+    this.setState({
+      sendAMsg: msg
+    })
   }
-
   render() {
     return (
       <div>
-        <Son getSonMesg={this.getSonMesg}></Son>
+        <SonA sendAMsg={this.state.sendAMsg}></SonA>
+        <SonB getBMsg={this.getBMsg}></SonB>
       </div >
     )
   }
