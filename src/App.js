@@ -1,21 +1,25 @@
-// 组件生命周期挂载阶段执行顺序
-// 注意：只有类组件才有生命周期，函数没有
+// 组件更新阶段生命周期
 import React from 'react'
 
 class App extends React.Component {
-  constructor() {
-    super()
-    console.log('constructor 1')
+  // 更新阶段生命周期
+  // 注意不要在这里调用setState
+  componentDidUpdate() {
+    console.log('componentDidUpdate 2')
   }
-  componentDidMount() {
-    console.log('componentDidMount 3')
-    // 发送 ajax 请求
+  handlerUpdate = () => {
+    this.setState({
+      a: this.state.a + 1
+    })
+  }
+  state = {
+    a: 1
   }
   render() {
-    console.log('render 2')
+    console.log('render 1')
     return (
       <>
-
+        <button onClick={this.handlerUpdate}>{this.state.a}</button>
       </>
     )
   }
