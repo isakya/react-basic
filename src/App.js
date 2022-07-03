@@ -1,47 +1,49 @@
-// 通过共同父组件在兄弟组件间传值
+// 跨组件通信
 
-// 目标：B组件中的数据 传给 A 组件
-// 1. 先把B中的数据通过子传父 传给App
-// 2. 再把App接收到的Son中的数据 通过父传子 传给A
-import React from 'react'
+// App -> A -> ... -> C
+// App的数据 -> C使用A的数据
+// 注意： 
+// 1. 上层组件和下层组件关系是相对的，只要存在就可以使用，通常我们都会通过app作为数据的提供方
+// 2. 这里设涉及到的语法都是固定的，有两处，提供的位置 value提供数据 获取的位置{value => 使用value}
 
-function SonA(props) {
+// 1. 导入createContext方法并执行,结构提供者和消费者
+import React, { createContext } from 'react'
+
+const { Provider, Consumer } = createContext()
+function ComA() {
   return (
     <div>
-      this is sonA
-      <p>{props.sendAMsg}</p>
+      this is Component A
+      <ComC></ComC>
     </div>
   )
 }
 
-function SonB(props) {
-  const bMsg = '这是来自B组件的数据'
+function ComC() {
+  // 3. 通过Comsumer使用数据
   return (
-    <>
-      <div>this is sonB</div>
-      <button onClick={() => props.getBMsg(bMsg)}>B组件按钮</button>
-    </>
+    <div>
+      this is Component C
+      <hr />
+      <Consumer>
+        {value => <span>{value}</span>}
+      </Consumer>
+    </div>
   )
 }
 
-
 class App extends React.Component {
   state = {
-    sendAMsg: ''
-  }
-  // 声明一个传给B组件的方法
-  getBMsg = (msg) => {
-    // 把msg数据交给sendAMsg
-    this.setState({
-      sendAMsg: msg
-    })
+    message: 'this is message!'
   }
   render() {
     return (
-      <div>
-        <SonA sendAMsg={this.state.sendAMsg}></SonA>
-        <SonB getBMsg={this.getBMsg}></SonB>
-      </div >
+      // 2. 使用provider包裹 根 组件
+      <Provider value={this.state.message}>
+        <div>
+          <ComA></ComA>
+        </div>
+      </Provider>
     )
   }
 }
