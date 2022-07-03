@@ -1,49 +1,38 @@
-// 跨组件通信
+import React from 'react'
 
-// App -> A -> ... -> C
-// App的数据 -> C使用A的数据
-// 注意： 
-// 1. 上层组件和下层组件关系是相对的，只要存在就可以使用，通常我们都会通过app作为数据的提供方
-// 2. 这里设涉及到的语法都是固定的，有两处，提供的位置 value提供数据 获取的位置{value => 使用value}
-
-// 1. 导入createContext方法并执行,结构提供者和消费者
-import React, { createContext } from 'react'
-
-const { Provider, Consumer } = createContext()
-function ComA() {
+// 渲染列表
+function ListItem({ item, delItem }) {
   return (
     <div>
-      this is Component A
-      <ComC></ComC>
+      <div>
+        <h3>{item.name}</h3>
+        <p>{item.price}</p>
+        <p>{item.info}</p>
+        <button onClick={() => delItem(item.id)}>删除</button>
+      </div>
     </div>
   )
 }
 
-function ComC() {
-  // 3. 通过Comsumer使用数据
-  return (
-    <div>
-      this is Component C
-      <hr />
-      <Consumer>
-        {value => <span>{value}</span>}
-      </Consumer>
-    </div>
-  )
-}
-
+// 数据提供者
 class App extends React.Component {
   state = {
-    message: 'this is message!'
+    list: [
+      { id: 1, name: 'zs', price: 19.0, info: '促销' },
+      { id: 2, name: 'zs', price: 19.0, info: '促销' },
+      { id: 3, name: 'li', price: 19.0, info: '促销' }
+    ]
+  }
+  delItem = (id) => {
+    this.setState({
+      list: this.state.list.filter(item => item.id !== id)
+    })
   }
   render() {
     return (
-      // 2. 使用provider包裹 根 组件
-      <Provider value={this.state.message}>
-        <div>
-          <ComA></ComA>
-        </div>
-      </Provider>
+      <>
+        {this.state.list.map(item => <ListItem delItem={this.delItem} key={item.id} item={item} />)}
+      </>
     )
   }
 }
