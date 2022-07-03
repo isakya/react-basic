@@ -1,9 +1,6 @@
 // props校验
-// 支持类型：
-// 1. js的所有数据类型
-// 2. isRequired 必传
-
 import React from 'react'
+// 里面有各种各样的内置的校验规则
 import PropTypes from 'prop-types'
 
 function Test({ list }) {
@@ -15,7 +12,8 @@ function Test({ list }) {
 }
 
 Test.propTypes = {
-  list: PropTypes.array.isRequired // 限定为必传
+  // 定义各种规则
+  list: PropTypes.array // 限定为数组类型
 }
 
 class App extends React.Component {
