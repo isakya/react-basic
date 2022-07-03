@@ -10,8 +10,6 @@
 // 1. app组件会再次渲染 这个函数会再次执行
 // 2. useState再次执行 得到的新的count值不是0而是修改之后的1 模板会用新值渲染 
 
-// 重点：useState初始值只在首次渲染生效 后续只要调用setCount整个app中的代码都会执行，此时的count每次拿到的都是最新值
-
 
 import { useState } from 'react'
 
