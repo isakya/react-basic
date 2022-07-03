@@ -1,25 +1,30 @@
-// 组件更新阶段生命周期
+// 组件卸载阶段生命周期
 import React from 'react'
 
-class App extends React.Component {
-  // 更新阶段生命周期
-  // 注意不要在这里调用setState
-  componentDidUpdate() {
-    console.log('componentDidUpdate 2')
-  }
-  handlerUpdate = () => {
-    this.setState({
-      a: this.state.a + 1
-    })
-  }
-  state = {
-    a: 1
+class Test extends React.Component {
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
+    // 常用来清理定时器
   }
   render() {
-    console.log('render 1')
+    return <div>test</div>
+  }
+}
+
+class App extends React.Component {
+  state = {
+    flag: true
+  }
+  handlerToggle = () => {
+    this.setState({
+      flag: !this.state.flag
+    })
+  }
+  render() {
     return (
       <>
-        <button onClick={this.handlerUpdate}>{this.state.a}</button>
+        {this.state.flag ? <Test /> : null}
+        <button onClick={this.handlerToggle}>切换</button>
       </>
     )
   }
