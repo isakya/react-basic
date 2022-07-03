@@ -1,24 +1,16 @@
-// 组件的更新过程
-// 当调用setCount的时候 更新过程
-
-// 首次渲染
-// 首次渲染的时候 组件内部的代码会被执行一次
-// 其中useState也会跟着执行 这里重点注意 初始值只在首次渲染时生效
-
-
-// 更新渲染 setCount 都会更新
-// 1. app组件会再次渲染 这个函数会再次执行
-// 2. useState再次执行 得到的新的count值不是0而是修改之后的1 模板会用新值渲染 
-
-// 重点：useState初始值只在首次渲染生效 后续只要调用setCount整个app中的代码都会执行，此时的count每次拿到的都是最新值
-
+// useState的使用规则
 
 import { useState } from 'react'
 
 
 
 function App() {
+  // 1. useState可以执行多次
+  // 2. 只能在函数组件最外层调用
+  // 3. 不能嵌套在if等条件语句里执行
   const [count, setCount] = useState(0)
+  const [flag, setFlag] = useState(true)
+  const [list, setList] = useState([])
 
   return (
     <div>
