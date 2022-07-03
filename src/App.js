@@ -1,37 +1,35 @@
+// 特殊的children属性
+// 只要写在组件标签的内部，都会出现在组件props里的children属性当中
+// 标签里可以是：
+// 1. 普通文本
+// 2. 普通标签
+// 3. 函数
+// 4. jsx
+
 import React from 'react'
 
 // 渲染列表
-function ListItem({ item, delItem }) {
+function ListItem({ children }) {
   return (
     <div>
-      <div>
-        <h3>{item.name}</h3>
-        <p>{item.price}</p>
-        <p>{item.info}</p>
-        <button onClick={() => delItem(item.id)}>删除</button>
-      </div>
+      listItem,
+      {children}
     </div>
   )
 }
 
 // 数据提供者
 class App extends React.Component {
-  state = {
-    list: [
-      { id: 1, name: 'zs', price: 19.0, info: '促销' },
-      { id: 2, name: 'zs', price: 19.0, info: '促销' },
-      { id: 3, name: 'li', price: 19.0, info: '促销' }
-    ]
-  }
-  delItem = (id) => {
-    this.setState({
-      list: this.state.list.filter(item => item.id !== id)
-    })
-  }
+
+
   render() {
     return (
       <>
-        {this.state.list.map(item => <ListItem delItem={this.delItem} key={item.id} item={item} />)}
+        <ListItem>
+          this is child
+          <div>this is thild</div>
+          <p>this is p</p>
+        </ListItem>
       </>
     )
   }
