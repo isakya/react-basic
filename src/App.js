@@ -1,35 +1,29 @@
-// 特殊的children属性
-// 只要写在组件标签的内部，都会出现在组件props里的children属性当中
-// 标签里可以是：
-// 1. 普通文本
-// 2. 普通标签
-// 3. 函数
-// 4. jsx
-
+// props校验
 import React from 'react'
+// 里面有各种各样的内置的校验规则
+import PropTypes from 'prop-types'
 
-// 渲染列表
-function ListItem({ children }) {
+function Test({ list }) {
   return (
     <div>
-      listItem,
-      {children}
+      {list.map(item => <p key={item}>{item}</p>)}
     </div>
   )
 }
 
-// 数据提供者
+Test.propTypes = {
+  // 定义各种规则
+  list: PropTypes.array // 限定为数组类型
+}
+
 class App extends React.Component {
-
-
+  state = {
+    list: [1, 2]
+  }
   render() {
     return (
       <>
-        <ListItem>
-          this is child
-          <div>this is thild</div>
-          <p>this is p</p>
-        </ListItem>
+        <Test list={this.state.list}></Test>
       </>
     )
   }
