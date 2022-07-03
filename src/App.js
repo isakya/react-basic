@@ -1,16 +1,20 @@
-// useState的使用规则
+// useEffect-理解副作用函数
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
+// 在修改数据之后，把count值放到页面标题中
+// 1. 导入useEffect函数
+// 2. 在函数组件中执行 传入回调，并且定义副作用
+// 3. 当我们通过修改状态更新组件时，副作用也会不断执行
 
 function App() {
-  // 1. useState可以执行多次
-  // 2. 只能在函数组件最外层调用
-  // 3. 不能嵌套在if等条件语句里执行
+
   const [count, setCount] = useState(0)
-  const [flag, setFlag] = useState(true)
-  const [list, setList] = useState([])
+  useEffect(() => {
+    // 定义副作用
+    document.title = count
+  })
 
   return (
     <div>
