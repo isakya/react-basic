@@ -1,7 +1,10 @@
+// 导入hook
 import { useWindowScroll } from './hooks/useWindowScroll'
+
 
 function App() {
 
+  // 使用hook
   const [y] = useWindowScroll()
 
   return (
