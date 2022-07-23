@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 function Counter(props) {
+  // useState传入函数作为初始化参数
   const [count, setCount] = useState(() => {
     return props.count
   })
