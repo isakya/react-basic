@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 
+// 函数组件用 useContest 跨组件传递数据
 const Context = createContext()
 
 function ComA() {
