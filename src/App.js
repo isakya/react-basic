@@ -1,6 +1,8 @@
-import React, { createContext, useContext, useState } from 'react'
+// 从外部导入Context
+import Context from './context'
 
-const Context = createContext()
+import React, { useContext, useState } from 'react'
+
 
 function ComA() {
   const count = useContext(Context)
@@ -30,12 +32,12 @@ function ComC() {
 function App() {
   const [count, setCount] = useState(20)
   return (
-    <Context.Provider value={count}>
-      <div>
-        <ComA />
-        <button onClick={() => { setCount(count + 1) }}>加一</button>
-      </div>
-    </Context.Provider>
+    // <Context.Provider value={count}>
+    <div>
+      <ComA />
+      <button onClick={() => { setCount(count + 1) }}>加一</button>
+    </div>
+    // </Context.Provider>
   )
 }
 
